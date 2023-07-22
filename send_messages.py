@@ -4,18 +4,18 @@ from telethon.sync import TelegramClient
 from telethon.errors import UserPrivacyRestrictedError
 from telethon.tl.functions.messages import SendMessageRequest
 
-api_id = 20066700
-api_hash = 'af5de23471cd3ce06be10478e567c762'
-phone_number = '+542914733243'  # Your phone number with country code, e.g., +1234567890
-MESSAGE_SENT_THRESHOLD = 2 # Quantity of message that the script will sent
-MESSAGE_COOLDOWN_IN_SECONDS = 20 # Expressed in seconds 
+api_id = 29087869
+api_hash = 'eedb31c3af1d4709db08375bd6845e03'
+phone_number = '+5491176435530'  # Your phone number with country code, e.g., +1234567890
+MESSAGE_SENT_THRESHOLD = 30 # Quantity of message that the script will sent
+MESSAGE_COOLDOWN_IN_SECONDS = 60 # Expressed in seconds 
 
 global_file_name = ""  # Global variable to store the file name
 
 # Dictionary of group IDs and their names
 groups = {
-    -838510899: 'Testing script group',
-    #'group2_id': 'Group 2 Name',
+    -1001809965981: 'highincomeskillsacademy',
+    -1001600100217: 'purplemangogeneral',
 }
 
 client = TelegramClient(phone_number, api_id, api_hash)
