@@ -18,7 +18,21 @@ groups = {
     -1001600100217: 'purplemangogeneral',
 }
 
+def read_string_from_file(filename):
+    try:
+        with open(filename, 'r', encoding='utf-8') as file:
+            content = file.read()
+            return content
+    except FileNotFoundError:
+        print(f"File '{filename}' not found.")
+        return ""
+
 client = TelegramClient(phone_number, api_id, api_hash)
+
+phone_number_input = read_string_from_file("phone-number.txt")
+password_input = read_string_from_file("password.txt")
+        
+client.start(phone=phone_number_input, password=password_input)
 
 # Function to update the CSV file
 def update_csv_file(group_name, member, message_sent):
@@ -176,16 +190,14 @@ async def process_in_progress_flow(pending_user_ids):
 
 async def main():
     try:
-        await client.start()
-
         in_progress_finish = False
         pending_user_ids = check_pending_status()
         
         if pending_user_ids:
-            in_progress_finish = await process_in_progress_flow(pending_user_ids)
+            in_progress_finish = await process_in_progress_flow(client, pending_user_ids)
 
         if not in_progress_finish:
-            await process_initial_flow()
+            await process_initial_flow(client)
 
     finally:
         await client.disconnect()
