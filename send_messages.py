@@ -191,13 +191,17 @@ async def process_in_progress_flow(pending_user_ids):
 async def main():
     try:
         in_progress_finish = False
-        pending_user_ids = check_pending_status()
+        check_pending = input("Do you wanna check for pending status?(Y/N): ").strip().lower() == 'y'
+        pending_user_ids = []
+
+        if check_pending:
+            pending_user_ids = check_pending_status()
         
         if pending_user_ids:
-            in_progress_finish = await process_in_progress_flow(client, pending_user_ids)
+            in_progress_finish = await process_in_progress_flow(pending_user_ids)
 
         if not in_progress_finish:
-            await process_initial_flow(client)
+            await process_initial_flow()
 
     finally:
         await client.disconnect()
